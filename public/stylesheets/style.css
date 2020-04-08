@@ -1,8 +1,48 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+  outline: none;
 }
 
-a {
-  color: #00B7FF;
+body {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: slateblue;
+  font-family: 'Roboto', sans-serif;
+  color: white;
+}
+
+main {
+  max-width: 800px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.deckItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  background-color: skyblue;
+  box-shadow: 0px 4px rgba(0, 0, 0, 0.5);
+}
+.deckItem:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  font-size: 35pt;
+  text-shadow: 0px 4px rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
 }
