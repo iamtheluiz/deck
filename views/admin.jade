@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  section#panel
+    a(href="/")
+      i.material-icons arrow_back
+    h2 Control Panel
+    form(data-action="/commands", data-method="POST")
+      input(type="text", name="name", placeholder="Name...", required)
+      input(type="text", name="image", placeholder="Image...", required)
+      select(name="type", required)
+        option(value="website") Website
+        option(value="program") Program
+      input(type="text", name="content", placeholder="Content...", required)
+      button(type="submit") Send
+    h3 Commands
+    table
+      thead
+        tr
+          th Name
+          th Type
+          th Content
+      tbody
+        each command in commands
+          tr
+            td= command.name
+            td= command.type
+            td= command.content

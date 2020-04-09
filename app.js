@@ -1,16 +1,42 @@
 // Modules
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const fs = require('fs');
 
 // Routes
-var deviceRouter = require('./routes/device');
-var deckRouter = require('./routes/deck');
+const deviceRouter = require('./routes/device');
+const deckRouter = require('./routes/deck');
+const adminRouter = require('./routes/admin');
+const commandsRouter = require('./routes/commands');
+
+// Helpers
+const getProgramData = require('./helpers/getProgramData');
 
 // Define App
-var app = express();
+const app = express();
+
+// Store Program Data
+let programData = {
+  commands: []
+};
+
+fs.readFile(path.resolve(__dirname, 'database', 'storage.json'), (err, data) => {
+  if (err) {
+    fs.writeFile(path.resolve(__dirname, 'database', 'storage.json'), JSON.stringify(programData), () => {});
+    return;
+  }
+  programData = JSON.parse(data);
+});
+
+// Middleware Commands
+app.use((req, res, next) => {
+  req.programData = programData;
+
+  return next();
+});
 
 // View Engine
 app.set('views', path.join(__dirname, 'views'));
@@ -25,7 +51,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
 app.use('/', deviceRouter);
+app.use('/admin', adminRouter)
 app.use('/deck', deckRouter);
+app.use('/commands', commandsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,6 +65,7 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.title = "Error | Virtual Deck"
 
   // render the error page
   res.status(err.status || 500);
