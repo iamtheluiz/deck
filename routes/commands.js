@@ -10,6 +10,10 @@ router.post('/', (req, res, next) => {
 
   commands[commands.length] = req.body;
 
+  res.json({
+    data: commands
+  });
+
   return next();
 }, commands.store);
 
@@ -18,6 +22,15 @@ router.get('/', (req, res, next) => {
     data: req.programData.commands
   });
 });
+
+router.delete('/:index', (req, res, next) => {
+  let { commands } = req.programData;
+
+  // Remove array position
+  commands.splice(req.params.index, 1);
+
+  return next();
+}, commands.store);
 
 router.get('/execute', (req, res, next) => {
   const command = req.programData.commands[req.headers.index];

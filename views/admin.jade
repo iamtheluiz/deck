@@ -20,9 +20,13 @@ block content
           th Name
           th Type
           th Content
+          th Content
       tbody
-        each command in commands
+        each command, index in commands
           tr
             td= command.name
             td= command.type
             td= command.content
+            td
+              a(onClick="deleteCommand(#{index})")
+                i.material-icons delete
