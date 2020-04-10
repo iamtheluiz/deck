@@ -3,6 +3,6 @@ extends layout
 block content
   h1 Virtual Deck
   main
-    each command in commands
-      button.deckItem
+    each command, i in commands
+      button.deckItem(onclick="executeCommand(#{i})")
         img(src=command.image)

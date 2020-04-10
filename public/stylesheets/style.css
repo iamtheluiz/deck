@@ -48,6 +48,7 @@ main {
   max-height: 60vh;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 h1 {
@@ -89,6 +90,7 @@ a {
   background-color: white;
   box-shadow: 0px 4px rgba(0, 0, 0, 0.5);
   cursor: pointer;
+  margin: 5px;
 }
 
 .deckItem:active, .deviceOption:active {
