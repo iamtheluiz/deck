@@ -10,11 +10,11 @@ router.post('/', (req, res, next) => {
 
   commands[commands.length] = req.body;
 
-  next();
+  return next();
 }, commands.store);
 
 router.get('/', (req, res, next) => {
-  res.json({
+  return res.json({
     data: req.programData.commands
   });
 });
@@ -25,7 +25,7 @@ router.get('/execute', (req, res, next) => {
   // Execute command
   opener(command.content);
 
-  res.json({
+  return res.json({
     success: true
   })
 });
