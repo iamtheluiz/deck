@@ -12,9 +12,6 @@ const deckRouter = require('./routes/deck');
 const adminRouter = require('./routes/admin');
 const commandsRouter = require('./routes/commands');
 
-// Helpers
-const getProgramData = require('./helpers/getProgramData');
-
 // Define App
 const app = express();
 
@@ -25,6 +22,7 @@ let programData = {
 
 fs.readFile(path.resolve(__dirname, 'database', 'storage.json'), (err, data) => {
   if (err) {
+    fs.mkdirSync(path.resolve(__dirname, 'database'));
     fs.writeFile(path.resolve(__dirname, 'database', 'storage.json'), JSON.stringify(programData), () => {});
     return;
   }
