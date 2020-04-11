@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const opener = require('opener');
+const robot = require('robotjs');
 
 // Middleware
 const commandsMiddleware = require('../middlewares/commands');
@@ -9,7 +10,7 @@ router.post('/', (req, res, next) => {
   let { commands } = req.programData;
   let command = {};
   const { name, image, type, content } = req.body;
-  
+
   if (type === 'folder') {
     command = {
       name,
@@ -22,11 +23,11 @@ router.post('/', (req, res, next) => {
       name,
       image,
       type,
-      content
+      content: JSON.parse(content)
     };
   }
 
-  if(req.body.folder && req.body.folder !== '') {
+  if (req.body.folder && req.body.folder !== '') {
     commands[req.body.folder].content[commands[req.body.folder].content.length] = command;
   } else {
     commands[commands.length] = command;
@@ -59,8 +60,20 @@ router.get('/execute', (req, res, next) => {
     command = req.programData.commands[req.headers.index];
   }
 
-  // Execute command
-  opener(command.content);
+  if (command.type === "shortcut") {
+    // Press keys
+    command.content.forEach(key => {
+      robot.keyToggle(key, "down");
+    });
+
+    // Release keys
+    command.content.forEach(key => {
+      robot.keyToggle(key, "up");
+    });
+  } else {
+    // Execute command
+    opener(command.content);
+  }
 
   return res.json({
     success: true
