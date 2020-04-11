@@ -1,0 +1,12 @@
+{
+  "name": "VirtualDeck",
+  "short_name": "Deck",
+  "author": {
+    "name": "Luiz Gustavo da Silva Vasconcellos",
+    "github": "https://github.com/iamtheluiz"
+  },
+  "start_url": "/deck",
+  "display": "fullscreen",
+  "background_color": "slateblue",
+  "theme_color": "#171717"
+}
