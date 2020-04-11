@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "opener http://localhost:3000/admin && node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "set NODE_ENV=development && nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -13,6 +13,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
+    "opener": "^1.5.1",
     "robotjs": "^0.6.0"
   },
   "devDependencies": {
