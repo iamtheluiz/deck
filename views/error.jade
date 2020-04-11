@@ -1,6 +1,6 @@
 extends layout
 
 block content
+  a(onClick="window.history.back();")
+    i.material-icons home
   h1= message
-  h2= error.status
-  pre #{error.stack}

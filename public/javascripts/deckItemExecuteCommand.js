@@ -1,7 +1,8 @@
-function executeCommand(commandIndex) {
+function executeCommand(commandIndex, folder = "") {
   axios.get('/commands/execute', {
     headers: {
-      index: commandIndex
+      index: commandIndex,
+      folder
     }
   });
 }

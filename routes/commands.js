@@ -3,19 +3,37 @@ const router = express.Router();
 const opener = require('opener');
 
 // Middleware
-const commands = require('../middlewares/commands');
+const commandsMiddleware = require('../middlewares/commands');
 
 router.post('/', (req, res, next) => {
   let { commands } = req.programData;
+  let command = {};
+  const { name, image, type, content } = req.body;
+  
+  if (type === 'folder') {
+    command = {
+      name,
+      image,
+      type,
+      content: []
+    };
+  } else {
+    command = {
+      name,
+      image,
+      type,
+      content
+    };
+  }
 
-  commands[commands.length] = req.body;
-
-  res.json({
-    data: commands
-  });
+  if(req.body.folder && req.body.folder !== '') {
+    commands[req.body.folder].content[commands[req.body.folder].content.length] = command;
+  } else {
+    commands[commands.length] = command;
+  }
 
   return next();
-}, commands.store);
+}, commandsMiddleware.store);
 
 router.get('/', (req, res, next) => {
   return res.json({
@@ -30,10 +48,16 @@ router.delete('/:index', (req, res, next) => {
   commands.splice(req.params.index, 1);
 
   return next();
-}, commands.store);
+}, commandsMiddleware.store);
 
 router.get('/execute', (req, res, next) => {
-  const command = req.programData.commands[req.headers.index];
+  let command = {};
+
+  if (req.headers.folder && req.headers.folder !== '') {
+    command = req.programData.commands[req.headers.folder].content[req.headers.index];
+  } else {
+    command = req.programData.commands[req.headers.index];
+  }
 
   // Execute command
   opener(command.content);

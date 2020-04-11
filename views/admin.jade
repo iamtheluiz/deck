@@ -2,31 +2,42 @@ extends layout
 
 block content
   section#panel
-    a(href="/")
+    a(href=folder ? '/admin' : '/')
       i.material-icons arrow_back
     h2 Control Panel
     form(data-action="/commands", data-method="POST")
+      if folder
+        input(type="hidden", name="folder", value=folder, required)
       input(type="text", name="name", placeholder="Name...", required)
       input(type="text", name="image", placeholder="Image...", required)
       select(name="type", required)
+        option(value="folder") Folder
         option(value="website") Website
         option(value="program") Program
       input(type="text", name="content", placeholder="Content...", required)
       button(type="submit") Send
-    h3 Commands
-    table
-      thead
-        tr
-          th Name
-          th Type
-          th Content
-          th Content
-      tbody
-        each command, index in commands
+    div.table-container 
+      h3 Commands
+      table
+        thead
           tr
-            td= command.name
-            td= command.type
-            td= command.content
-            td
-              a(onClick="deleteCommand(#{index})")
-                i.material-icons delete
+            th
+            th Name
+            th Type
+            th Content
+            th Content
+        tbody
+          each command, index in commands
+            tr
+              if command.type == 'folder'
+                td
+                  a(href="/admin/#{index}")
+                    i.material-icons folder
+              else
+                td
+              td= command.name
+              td= command.type
+              td= command.type == 'folder' ? '-' : command.content
+              td
+                a(onClick="deleteCommand(#{index})")
+                  i.material-icons delete

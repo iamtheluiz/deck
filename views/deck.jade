@@ -1,8 +1,12 @@
 extends layout
 
 block content
-  h1 Virtual Deck
+  header
+    if folder
+      a(href="/deck")
+        i.material-icons arrow_back
+    h1 Virtual Deck
   main
     each command, i in commands
-      button.deckItem(onclick="executeCommand(#{i})")
+      button.deckItem(onclick=(command.type == 'folder') ? "window.location = '/deck/#{i}'" : folder ? "executeCommand(#{i}, #{folder})" : "executeCommand(#{i})")
         img(src=command.image)
