@@ -1,5 +1,4 @@
 const { BrowserWindow, app, Tray, Menu } = require('electron');
-const path = require('path');
 require('./bin/www');
 
 const applicationIcon = './build/icon.ico';
@@ -12,9 +11,9 @@ app.on('ready', () => {
     icon: applicationIcon
   });
 
-  const applicationTray = new Tray(applicationIcon);
+  let applicationTray = new Tray(applicationIcon);
 
-  var contextMenu = Menu.buildFromTemplate([
+  let contextMenu = Menu.buildFromTemplate([
     {
       label: 'Show App',
       click: () => {
@@ -47,6 +46,7 @@ app.on('ready', () => {
   mainWindow.removeMenu();
   mainWindow.loadURL('http://localhost:3636');
   mainWindow.on('close', event => {
+    applicationTray = null;
     mainWindow = null;
   });
 

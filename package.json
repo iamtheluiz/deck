@@ -4,9 +4,6 @@
   "version": "0.0.0",
   "author": "iamtheluiz <iamtheluiz.dev@gmail.com>",
   "private": true,
-  "bin": {
-    "virtualdeck": "./bin/www"
-  },
   "main": "main.js",
   "build": {
     "appId": "com.electron.virtualdeck",
