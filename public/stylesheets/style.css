@@ -33,6 +33,28 @@
   outline: none;
 }
 
+header#navigation {
+  position: absolute;
+  text-align: right;
+  top: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 20px;
+}
+header#navigation button {
+  width: 40px;
+  height: 20px;
+  background-color: transparent;
+  cursor: pointer;
+}
+header#navigation button i {
+  font-size: 18px;
+  color: white;
+}
+header#navigation button:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 body {
   display: flex;
   min-height: 100vh;
@@ -43,13 +65,13 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-header {
+header#deck {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-header i {
+header#deck i {
   font-size: 40px !important;
   color: white;
   text-shadow: 0px 4px rgba(0, 0, 0, 0.5);
