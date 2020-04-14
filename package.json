@@ -2,6 +2,9 @@
   "name": "virtualdeck",
   "version": "0.0.0",
   "private": true,
+  "bin": {
+    "virtualdeck": "./bin/www"
+  },
   "scripts": {
     "start": "opener http://localhost:3000/admin && node ./bin/www",
     "dev": "set NODE_ENV=development && nodemon ./bin/www"

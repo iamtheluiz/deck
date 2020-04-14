@@ -18,12 +18,19 @@ router.post('/', (req, res, next) => {
       type,
       content: []
     };
-  } else {
+  } else if (type === 'shortcut') {
     command = {
       name,
       image,
       type,
       content: JSON.parse(content)
+    };
+  } else {
+    command = {
+      name,
+      image,
+      type,
+      content
     };
   }
 
