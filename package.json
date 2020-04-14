@@ -3,12 +3,14 @@
   "description": "A virtual control pad",
   "version": "0.0.0",
   "author": "iamtheluiz <iamtheluiz.dev@gmail.com>",
+  "repository": "https://github.com/iamtheluiz/deck.git",
   "private": true,
   "main": "main.js",
   "build": {
     "appId": "com.electron.virtualdeck",
     "win": {
-      "target": "NSIS"
+      "target": "NSIS",
+      "publish": ["github"]
     }
   },
   "scripts": {

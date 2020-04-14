@@ -1,5 +1,5 @@
 if (document.querySelector('form')) {
-  document.querySelector('form').onsubmit = (event) => {
+  document.querySelector('form').onsubmit = event => {
     event.preventDefault();
 
     // Get fields
@@ -20,5 +20,8 @@ if (document.querySelector('form')) {
 
     // Send request
     axios.post('/commands', data);
+
+    // Reload page
+    window.location.reload();
   }
 }
