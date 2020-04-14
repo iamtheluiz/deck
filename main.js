@@ -1,4 +1,5 @@
 const { BrowserWindow, app, Tray, Menu } = require('electron');
+const path = require('path');
 require('./bin/www');
 
 const applicationIcon = './build/icon.ico';
@@ -11,7 +12,7 @@ app.on('ready', () => {
     icon: applicationIcon
   });
 
-  let applicationTray = new Tray(applicationIcon);
+  let applicationTray = new Tray(path.resolve(__dirname, 'assets', 'icon.png'));
 
   let contextMenu = Menu.buildFromTemplate([
     {
