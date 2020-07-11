@@ -6,7 +6,7 @@ export const Container = styled.header`
   justify-content: flex-end;
   align-items: center;
   height: 32px;
-  padding: 8px;
+  padding: 4px;
   background-color: #00000050;
   -webkit-app-region: no-drag;
 `

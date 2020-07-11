@@ -1,8 +1,8 @@
 import { app, BrowserWindow, nativeImage } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
+import './server'
 
-require('./server')
 let mainWindow: Electron.BrowserWindow | null
 
 function createWindow () {
@@ -11,7 +11,8 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     width: 1100,
     height: 700,
-    backgroundColor: '#0D1B1E',
+    minWidth: 1000,
+    backgroundColor: '#16324F',
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true
