@@ -16,7 +16,7 @@
     "test": "jest"
   },
   "build": {
-    "appId": "com.electron.harmonist",
+    "appId": "com.electron.deck",
     "win": {
       "target": "NSIS"
     },
@@ -24,7 +24,8 @@
       "dist/**/*"
     ],
     "directories": {
-      "output": "build/"
+      "output": "build/",
+      "buildResources": "assets/"
     }
   },
   "keywords": [],

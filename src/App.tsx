@@ -17,7 +17,7 @@ const App = () => {
       <Header />
       <BrowserRouter>
         <Switch>
-          <Route path="*" component={Main} />
+          <Route path="/" exact component={Main} />
         </Switch>
       </BrowserRouter>
     </>

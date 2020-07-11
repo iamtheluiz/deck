@@ -6,7 +6,6 @@ Boilerplate for a project using Electron, React and Typescript
 
 - [diego3g/electron-typescript-react](https://github.com/diego3g/electron-typescript-react)
 
-
 ## Installation
 
 Use a package manager of your choice (npm, yarn, etc.) in order to install all dependencies
@@ -37,3 +36,11 @@ To build this project, run:
 ```bash
 yarn build
 ```
+
+## 💼 Authors
+
+* **Luiz Gustavo** - *Development* - [iamtheluiz](https://github.com/iamtheluiz)
+
+## 📃 License
+
+This project is under the GNU General Public License - see the [LICENSE](LICENSE) file for details.
