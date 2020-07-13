@@ -24,8 +24,8 @@ const App = () => {
         <DndProvider backend={HTML5Backend}>
           <BrowserRouter>
             <Switch>
-              <Route path="/" exact component={Main} />
               <Route path="/settings" exact component={Settings} />
+              <Route path="*" component={Main} />
             </Switch>
           </BrowserRouter>
         </DndProvider>

@@ -1,9 +1,12 @@
 import { app, BrowserWindow, nativeImage } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
-import './server'
 
 let mainWindow: Electron.BrowserWindow | null
+
+if (process.env.NODE_ENV !== 'development') {
+  require('../server/server')
+}
 
 function createWindow () {
   const icon = nativeImage.createFromPath(`${app.getAppPath()}/assets/icon.jpg`)
