@@ -13,19 +13,6 @@ export const Menu = styled.div`
   flex: 1;
 `
 
-export const MenuItem = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 42px;
-  cursor: pointer;
-`
-
-export const MenuItemText = styled.span`
-  margin-left: 4px;
-  font-size: 16pt;
-`
-
 export const Settings = styled.div`
   display: flex;
   flex-direction: row-reverse;

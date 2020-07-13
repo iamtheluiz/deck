@@ -9,6 +9,7 @@ interface DeckItem {
 interface DeckContextData {
   items: DeckItem[],
   setItems(arg0: DeckItem[]): void
+  addNewCommand(arg0: number, arg1: DeckItem, arg2: string): void
 }
 
 const DeckContext = React.createContext<DeckContextData>({} as DeckContextData)
@@ -41,10 +42,19 @@ export const DeckProvider: React.FC = ({ children }) => {
     setItems(serializedItems)
   }, [])
 
+  function addNewCommand (position: number, command: DeckItem, type: string) {
+    const commands = [...items]
+
+    commands[position] = command
+
+    setItems(commands)
+  }
+
   return (
     <DeckContext.Provider value={{
       items,
-      setItems
+      setItems,
+      addNewCommand
     }}>
       {children}
     </DeckContext.Provider>

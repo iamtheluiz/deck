@@ -4,12 +4,11 @@ import DeckContext from '../../contexts/Deck'
 import {
   Container,
   DeckContainer,
-  Deck,
-  DeckItem,
-  DeckImage
+  Deck
 } from './styles'
 
 import SideMenu from '../../components/SideMenu'
+import DeckItem from '../../components/DeckItem'
 
 const Main: React.FC = () => {
   const { items } = useContext(DeckContext)
@@ -19,11 +18,7 @@ const Main: React.FC = () => {
       <DeckContainer>
         <Deck>
           {items.map((item, index) => (
-            <DeckItem key={index}>
-              {item.icon && (
-                <DeckImage src={item.icon} />
-              )}
-            </DeckItem>
+            <DeckItem key={index} item={item} position={index} />
           ))}
         </Deck>
       </DeckContainer>

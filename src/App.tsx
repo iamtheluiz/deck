@@ -4,8 +4,12 @@ import { GlobalStyle } from './styles/GlobalStyle'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { DeckProvider } from './contexts/Deck'
 
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+
 import Header from './components/Header'
 import Main from './pages/Main'
+import Settings from './pages/Settings'
 
 const mainElement = document.createElement('div')
 mainElement.setAttribute('id', 'root')
@@ -17,11 +21,14 @@ const App = () => {
       <GlobalStyle />
       <Header />
       <DeckProvider>
-        <BrowserRouter>
-          <Switch>
-            <Route path="" exact component={Main} />
-          </Switch>
-        </BrowserRouter>
+        <DndProvider backend={HTML5Backend}>
+          <BrowserRouter>
+            <Switch>
+              <Route path="/" exact component={Main} />
+              <Route path="/settings" exact component={Settings} />
+            </Switch>
+          </BrowserRouter>
+        </DndProvider>
       </DeckProvider>
     </>
   )
