@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import api from '../services/api'
 
 interface DeckItem {
   id?: number,
@@ -18,36 +19,20 @@ export const DeckProvider: React.FC = ({ children }) => {
   const [items, setItems] = useState<DeckItem[]>([])
 
   useEffect(() => {
-    const serializedItems: DeckItem[] = Array(20)
-
-    // Insert default values
-    serializedItems.fill({}, 0, 20)
-
-    const response = [
-      {
-        id: 1,
-        position: 1,
-        name: 'twitch',
-        icon: 'https://cdn0.iconfinder.com/data/icons/social-network-7/50/16-512.png'
-      }
-    ]
-
-    // Define items from server
-    response.map(item => {
-      serializedItems[item.position - 1] = {
-        ...item
-      }
+    api.get('/').then(response => {
+      setItems(response.data)
     })
-
-    setItems(serializedItems)
   }, [])
 
   function addNewCommand (position: number, command: DeckItem, type: string) {
-    const commands = [...items]
+    api.post('/command', { position, ...command, type })
+      .then(({ data }) => {
+        const commands = [...items]
 
-    commands[position] = command
+        commands[position] = data
 
-    setItems(commands)
+        setItems(commands)
+      })
   }
 
   return (
