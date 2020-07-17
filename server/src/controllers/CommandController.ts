@@ -1,51 +1,103 @@
-import { Request, Response } from 'express'
+import { Request, Response, NextFunction } from 'express'
+import opener from 'opener'
+import robot from 'robotjs'
 
-interface DeckItem {
-  id?: number,
-  position: number,
-  icon?: string,
-  name?: string,
-  type?: string
-}
-
-const commands: DeckItem[] = [
-  {
-    id: 1,
-    position: 1,
-    name: 'twitch',
-    icon: 'https://cdn0.iconfinder.com/data/icons/social-network-7/50/16-512.png'
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace Express {
+    interface Request {
+      io: any;
+      client: any;
+      commands: any;
+    }
   }
-]
+}
 
 class CommandController {
   index (req: Request, res: Response): Response {
-    const serializedItems: DeckItem[] = Array(20)
-
-    // Insert default values
-    serializedItems.fill({} as DeckItem, 0, 20)
-
-    // Define items from server
-    commands.map(item => {
-      serializedItems[item.position - 1] = {
-        ...item
-      }
-    })
-
-    return res.json(serializedItems)
+    return res.json(req.commands)
   }
 
-  store (req: Request, res: Response): Response {
-    const { id, icon, name, position } = req.body
+  store (req: Request, res: Response, next: NextFunction): void {
+    const { icon, name, type, position, content } = req.body
 
     const command = {
-      id,
       icon,
-      name
+      name,
+      type
     }
 
-    commands[position + 1] = { ...command, position: position + 1 }
+    if (type === 'Folder') {
+      req.commands[position] = {
+        ...command,
+        position,
+        content: []
+      }
+    } else {
+      req.commands[position] = {
+        ...command,
+        position,
+        content
+      }
+    }
 
-    return res.json(command)
+    req.io.to(req.client).emit('new-command', req.commands)
+
+    return next()
+  }
+
+  update (req: Request, res: Response, next: NextFunction): void {
+    const { icon, name, type, position, content } = req.body
+
+    const command = {
+      icon,
+      name,
+      type
+    }
+
+    if (type === 'Folder') {
+      req.commands[position] = {
+        ...command,
+        position,
+        content: []
+      }
+    } else {
+      req.commands[position] = {
+        ...command,
+        position,
+        content
+      }
+    }
+
+    req.io.to(req.client).emit('new-command', req.commands)
+
+    return next()
+  }
+
+  execute (req: Request, res: Response): Response {
+    const { position }: any = req.params
+
+    const type = req.commands[position].type
+    const content = req.commands[position].content
+
+    if (type === 'Program' || type === 'Website') {
+      // Execute command
+      opener(content)
+    } else if (type === 'Shortcut') {
+      // Press keys
+      content.forEach((key: string) => {
+        robot.keyToggle(key, 'down')
+      })
+
+      // Release keys
+      content.forEach((key: string) => {
+        robot.keyToggle(key, 'up')
+      })
+    }
+
+    return res.json({
+      success: true
+    })
   }
 }
 

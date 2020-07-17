@@ -8,18 +8,19 @@ export const Container = styled.main`
 `
 
 export const DeckContainer = styled.div`
-  overflow: auto;
   display: flex;
   flex: 1;
   width: 100%;
   height: 100%;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `
 
 export const Deck = styled.div`
+  overflow: auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 630px;
+  width: 638px;
 `

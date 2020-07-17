@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import api from '../services/api'
-
-interface DeckItem {
-  id?: number,
-  icon?: string,
-  name?: string,
-}
+import { DeckItem } from '../@types/DeckItem'
 
 interface DeckContextData {
   items: DeckItem[],
-  setItems(arg0: DeckItem[]): void
-  addNewCommand(arg0: number, arg1: DeckItem, arg2: string): void
+  setItems(arg0: DeckItem[]): void,
+  addNewCommand(arg0: number, arg1: DeckItem, arg2: string): void,
+  updateCommand(arg0: DeckItem): void
 }
 
 const DeckContext = React.createContext<DeckContextData>({} as DeckContextData)
@@ -27,11 +23,14 @@ export const DeckProvider: React.FC = ({ children }) => {
   function addNewCommand (position: number, command: DeckItem, type: string) {
     api.post('/command', { position, ...command, type })
       .then(({ data }) => {
-        const commands = [...items]
+        setItems(data)
+      })
+  }
 
-        commands[position] = data
-
-        setItems(commands)
+  function updateCommand (command: DeckItem) {
+    api.put('/command', command)
+      .then(({ data }) => {
+        setItems(data)
       })
   }
 
@@ -39,7 +38,8 @@ export const DeckProvider: React.FC = ({ children }) => {
     <DeckContext.Provider value={{
       items,
       setItems,
-      addNewCommand
+      addNewCommand,
+      updateCommand
     }}>
       {children}
     </DeckContext.Provider>

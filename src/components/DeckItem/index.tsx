@@ -6,17 +6,18 @@ import DeckContext from '../../contexts/Deck'
 import { Container, Image } from './styles'
 
 interface DeckItem {
-  id?: number,
   icon?: string,
   name?: string,
+  content?: any
 }
 
 interface Props {
   item: DeckItem,
-  position: number
+  position: number,
+  onClick(): void
 }
 
-const DeckItem: React.FC<Props> = ({ item, position }) => {
+const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
   const { addNewCommand } = useContext(DeckContext)
 
   const [{ isOver }, drop] = useDrop({
@@ -31,15 +32,16 @@ const DeckItem: React.FC<Props> = ({ item, position }) => {
     const commandType = item.value
 
     addNewCommand(position, {
-      id: Math.ceil(Math.random() * 100),
       name: '-',
-      icon: 'https://cdn0.iconfinder.com/data/icons/social-network-7/50/16-512.png'
+      icon: 'https://cdn0.iconfinder.com/data/icons/social-network-7/50/16-512.png',
+      content: 'https://www.twitch.tv/'
     }, commandType)
   }
 
   return (
     <Container
       ref={drop}
+      onClick={item.name ? onClick : () => {}}
       style={isOver ? {
         borderWidth: 2,
         borderColor: '#FFFFFF60',
