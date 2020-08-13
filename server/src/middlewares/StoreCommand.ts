@@ -9,14 +9,15 @@ declare global {
       io: any;
       client: any;
       commands: any;
+      storage: string;
     }
   }
 }
 
-const store = async (req: Request, res: Response): Promise<Response> => {
+const store = (req: Request, res: Response): Response => {
   // Create a storage file
-  await fs.writeFileSync(
-    path.resolve(__dirname, '..', 'database', 'storage.json'),
+  fs.writeFileSync(
+    req.storage,
     JSON.stringify(req.commands)
   )
 

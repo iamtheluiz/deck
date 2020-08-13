@@ -9,6 +9,7 @@ declare global {
       io: any;
       client: any;
       commands: any;
+      storage: string;
     }
   }
 }
@@ -78,12 +79,14 @@ class CommandController {
     const { position }: any = req.params
 
     const type = req.commands[position].type
-    const content = req.commands[position].content
+    let content = req.commands[position].content
 
     if (type === 'Program' || type === 'Website') {
       // Execute command
       opener(content)
     } else if (type === 'Shortcut') {
+      content = JSON.parse(content)
+
       // Press keys
       content.forEach((key: string) => {
         robot.keyToggle(key, 'down')

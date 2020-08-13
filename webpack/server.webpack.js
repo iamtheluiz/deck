@@ -3,34 +3,37 @@ const path = require('path')
 const rootPath = path.resolve(__dirname, '..')
 
 module.exports = {
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js']
-  },
+  mode: 'development',
   devtool: 'source-map',
-  entry: path.resolve(rootPath, 'electron', 'main.ts'),
-  target: 'electron-main',
+  resolve: {
+    extensions: ['.ts', '.js']
+  },
+  entry: path.resolve(rootPath, 'server', 'server.ts'),
+  target: 'node',
   module: {
     rules: [
       {
-        test: /\.(js|ts|tsx)$/,
+        test: /\.(js|ts)$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
         }
       },
-      { 
+      {
         test: /\.node$/,
         use: {
           loader: 'node-loader'
         }
-      },
+      }
     ]
   },
-  node: {
-    __dirname: false
+  devServer: {
+    contentBase: path.join(rootPath, 'server', 'server.ts'),
+    host: 'localhost',
+    port: 4531
   },
   output: {
-    path: path.resolve(rootPath, 'dist'),
+    path: path.resolve(rootPath, 'dist/server'),
     filename: '[name].js'
-  }
+  },
 }

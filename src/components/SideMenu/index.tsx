@@ -1,7 +1,7 @@
 import React from 'react'
 import {
   FiList,
-  FiChevronRight,
+  FiGitMerge,
   FiGlobe,
   FiFolder,
   FiMonitor,
@@ -26,6 +26,7 @@ const SideMenu: React.FC = () => {
         <MenuItem icon={<FiGlobe size={30} />} name="Website" />
         <MenuItem icon={<FiFolder size={30} />} name="Folder" />
         <MenuItem icon={<FiMonitor size={30} />} name="Program" />
+        <MenuItem icon={<FiGitMerge size={30} />} name="Shortcut" />
       </Menu>
       <Settings>
         <FiSettings style={{ cursor: 'pointer' }} size={30} onClick={handleNavigateToSettings} />
