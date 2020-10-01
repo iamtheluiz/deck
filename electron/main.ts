@@ -1,4 +1,5 @@
-import { app, BrowserWindow, nativeImage } from 'electron'
+/* eslint-disable no-unused-expressions */
+import { app, BrowserWindow, nativeImage, Menu, Tray } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
 
@@ -8,6 +9,10 @@ require('../server/server')
 
 function createWindow () {
   const icon = nativeImage.createFromPath(`${app.getAppPath()}/assets/icon.jpg`)
+
+  if (app.dock) {
+    app.dock.setIcon(icon)
+  }
 
   mainWindow = new BrowserWindow({
     width: 1100,
@@ -40,5 +45,8 @@ function createWindow () {
   })
 }
 
-app.on('ready', createWindow)
+app.on('ready', () => {
+  createWindow()
+})
+
 app.allowRendererProcessReuse = true

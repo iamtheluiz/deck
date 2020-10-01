@@ -8,7 +8,8 @@ import { Container, Image } from './styles'
 interface DeckItem {
   icon?: string,
   name?: string,
-  content?: any
+  content?: any,
+  type?: string
 }
 
 interface Props {

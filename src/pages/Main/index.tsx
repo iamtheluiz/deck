@@ -17,24 +17,26 @@ const Main: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<DeckItem | null>(null)
 
   return (
-    <Container>
-      <DeckContainer>
-        <Deck>
-          {items.map((item, index) => (
-            <DeckItemComponent
-              key={index}
-              onClick={() => setSelectedItem(item)}
-              item={item}
-              position={index}
-            />
-          ))}
-        </Deck>
-        {selectedItem && (
-          <DeckItemInfo item={selectedItem} onClick={() => setSelectedItem(null)} />
-        )}
-      </DeckContainer>
-      <SideMenu />
-    </Container>
+    <>
+      {selectedItem && (
+        <DeckItemInfo item={selectedItem} onClick={() => setSelectedItem(null)} />
+      )}
+      <Container fade={!!selectedItem}>
+        <DeckContainer >
+          <Deck>
+            {items.map((item, index) => (
+              <DeckItemComponent
+                key={index}
+                onClick={() => setSelectedItem(item)}
+                item={item}
+                position={index}
+              />
+            ))}
+          </Deck>
+        </DeckContainer>
+        <SideMenu />
+      </Container>
+    </>
   )
 }
 

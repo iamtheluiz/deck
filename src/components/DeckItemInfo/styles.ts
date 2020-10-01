@@ -1,14 +1,20 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Modal = styled.div`
   display: flex;
   flex-direction: row;
-  flex: 1;
-  width: 100%;
-  min-height: 150px;
-  background-color: #00000035;
+  width: 600px;
+  height: 460px;
+  position: absolute;
+  z-index: 999;
+  background-color: #13293D;
   padding: 8px;
-  border-top: 2px solid #00000055;
+  border: 2px solid #00000055;
+  top: calc((100% - 460px) / 2);
+  left: calc((100% - 600px) / 2);
+`
+
+export const Container = styled.div`
   position: relative;
 `
 
@@ -35,10 +41,20 @@ export const Image = styled.img`
   pointer-events: none; /* Disable image drag */
 `
 
-export const Details = styled.div`
+export const Details = styled.form`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  flex: 1;
   padding: 8px 0px;
+`
+
+export const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  overflow: auto;
 `
 
 export const InputField = styled.div`
@@ -55,11 +71,22 @@ export const Label = styled.label`
 `
 
 export const Input = styled.input`
-  width: 300px;
+  width: 512px;
   padding: 8px;
   border-radius: 4px;
   font-size: 16px;
   border: 0px;
   color: white;
   background-color: #00000055;
+`
+
+export const Button = styled.button`
+  width: 98%;
+  padding: 12px 0px;
+  border: 0px;
+  border-radius: 4px;
+  font-size: 16px;
+  color: white;
+  background-color: #00000055;
+  cursor: pointer;
 `

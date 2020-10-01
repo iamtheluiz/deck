@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 
-export const Container = styled.main`
+export const Container = styled.main<{ fade: boolean }>`
   display: flex;
   width: 100%;
   height: calc(100vh - 32px);
   align-items: center;
+  filter: blur(${props => props.fade ? '5px' : '0px'});
 `
 
 export const DeckContainer = styled.div`

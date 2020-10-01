@@ -15,7 +15,7 @@ const server = http.createServer(app)
 let commands: DeckItem[] = Array(20)
 
 // Insert default values
-commands.fill({ position: 0 } as DeckItem, 0, 20)
+commands.fill({ position: -1 } as DeckItem, 0, 20)
 
 // Get stored commands
 if (fs.existsSync('storage.json')) {

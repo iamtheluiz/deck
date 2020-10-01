@@ -3,12 +3,15 @@ import { FiX } from 'react-icons/fi'
 import { DeckItem } from '../../@types/DeckItem'
 import DeckContext from '../../contexts/Deck'
 
-import { Container, Close, Image, Details, InputField, Input, Label } from './styles'
+import { Modal, Close, Image, Details, InputContainer, InputField, Input, Label, Button } from './styles'
 
 interface Props {
   item: DeckItem,
   onClick(): void
 }
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const dialog = require('electron').remote.dialog
 
 const DeckItemInfo: React.FC<Props> = ({ item, onClick }) => {
   const { updateCommand } = useContext(DeckContext)
@@ -35,51 +38,61 @@ const DeckItemInfo: React.FC<Props> = ({ item, onClick }) => {
     updateCommand(command)
   }
 
+  async function handleOpenDialog () {
+    const { filePaths } = await dialog.showOpenDialog({ properties: ['openFile'] })
+
+    setContent(filePaths[0])
+  }
+
   return (
-    <Container>
-      <Close onClick={onClick}>
-        <FiX size={20} />
-      </Close>
-      { icon && <Image src={icon} />}
-      <Details>
-        <form onSubmit={handleSubmit}>
-          <InputField>
-            <Label htmlFor="name">Name</Label>
-            <Input
-              type="text"
-              value={name}
-              onChange={event => {
-                setName(event.target.value)
-              }}
-            />
-          </InputField>
+    <>
+      <Modal>
+        <Close onClick={onClick}>
+          <FiX size={20} />
+        </Close>
+        <Details onSubmit={handleSubmit}>
+          <InputContainer>
+            {icon && <Image src={icon} />}
+            <InputField>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                type="text"
+                value={name}
+                onChange={event => {
+                  setName(event.target.value)
+                }}
+              />
+            </InputField>
 
-          <InputField>
-            <Label htmlFor="icon">Icon</Label>
-            <Input
-              type="text"
-              value={icon}
-              onChange={event => {
-                setIcon(event.target.value)
-              }}
-            />
-          </InputField>
+            <InputField>
+              <Label htmlFor="icon">Icon</Label>
+              <Input
+                type="text"
+                value={icon}
+                onChange={event => {
+                  setIcon(event.target.value)
+                }}
+              />
+            </InputField>
 
-          <InputField>
-            <Label htmlFor="icon">Content</Label>
-            <Input
-              type="text"
-              value={content}
-              onChange={event => {
-                setContent(event.target.value)
-              }}
-            />
-          </InputField>
+            <br />
+            <InputField>
+              <Label htmlFor="content">Content</Label>
+              <Input
+                type="text"
+                value={content}
+                disabled
+              />
+            </InputField>
+            {item.type === 'Program' && (
+              <Button onClick={handleOpenDialog}>Select Program</Button>
+            )}
+          </InputContainer>
 
-          <button type="submit">Enviar</button>
-        </form>
-      </Details>
-    </Container>
+          <Button type="submit">Enviar</Button>
+        </Details>
+      </Modal>
+    </>
   )
 }
 

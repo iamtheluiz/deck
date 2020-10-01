@@ -23,4 +23,5 @@ export const Image = styled.img`
   width: 100%;
   height: 100%;
   pointer-events: none; /* Disable image drag */
+  border-radius: 8px;
 `
