@@ -23,13 +23,13 @@ const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
 
   const [{ isOver }, drop] = useDrop({
     accept: ItemTypes.COMMAND,
-    drop: item => addCommand(item),
+    drop: (item: { type: string, value: string }) => addCommand(item),
     collect: monitor => ({
       isOver: !!monitor.isOver()
     })
   })
 
-  function addCommand (item: any) {
+  function addCommand (item: { type: string, value: string }) {
     const commandType = item.value
 
     addNewCommand(position, {
@@ -42,7 +42,7 @@ const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
   return (
     <Container
       ref={drop}
-      onClick={item.name ? onClick : () => {}}
+      onClick={item.name ? onClick : undefined}
       style={isOver ? {
         borderWidth: 2,
         borderColor: '#FFFFFF60',

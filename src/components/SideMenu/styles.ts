@@ -19,4 +19,12 @@ export const Settings = styled.div`
   width: 100%;
   height: 42px;
   padding: 0px 12px;
+
+  button {
+    background-color: transparent;
+    border: 0;
+
+    cursor: pointer;
+    color: white;
+  }
 `

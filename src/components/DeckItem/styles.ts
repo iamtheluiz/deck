@@ -10,9 +10,8 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 110px;
-  height: 110px;
-  margin: 8px;
+  width: 100%;
+  height: 100%;
   border-radius: 8px;
   background-color: #00000055;
   cursor: pointer;

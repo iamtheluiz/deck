@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
-import DeckContext from '../../contexts/Deck'
 import { DeckItem } from '../../@types/DeckItem'
+import DeckContext from '../../contexts/Deck'
 
 import {
   Container,
@@ -13,8 +13,9 @@ import DeckItemComponent from '../../components/DeckItem'
 import DeckItemInfo from '../../components/DeckItemInfo'
 
 const Main: React.FC = () => {
-  const { items } = useContext(DeckContext)
   const [selectedItem, setSelectedItem] = useState<DeckItem | null>(null)
+
+  const { items } = useContext(DeckContext)
 
   return (
     <>
@@ -22,7 +23,7 @@ const Main: React.FC = () => {
         <DeckItemInfo item={selectedItem} onClick={() => setSelectedItem(null)} />
       )}
       <Container fade={!!selectedItem}>
-        <DeckContainer >
+        <DeckContainer>
           <Deck>
             {items.map((item, index) => (
               <DeckItemComponent

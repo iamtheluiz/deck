@@ -4,7 +4,7 @@ import { FiX, FiMinus, FiMaximize } from 'react-icons/fi'
 
 import { Container, DragContainer, Button } from './styles'
 
-const Header: React.FC = () => {
+const ApplicationHeader: React.FC = () => {
   function handleCloseWindow () {
     const window = remote.getCurrentWindow()
 
@@ -44,4 +44,4 @@ const Header: React.FC = () => {
   )
 }
 
-export default Header
+export default ApplicationHeader

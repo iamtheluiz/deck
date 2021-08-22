@@ -1,13 +1,19 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { GlobalStyle } from './styles/GlobalStyle'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import { DeckProvider } from './contexts/Deck'
 
+// Drag and Drop
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
-import Header from './components/Header'
+// Styles
+import { GlobalStyle } from './styles/GlobalStyle'
+
+// Components
+import ApplicationHeader from './components/ApplicationHeader'
+
+// Pages
 import Main from './pages/Main'
 import Settings from './pages/Settings'
 
@@ -19,7 +25,7 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Header />
+      <ApplicationHeader />
       <DeckProvider>
         <DndProvider backend={HTML5Backend}>
           <BrowserRouter>

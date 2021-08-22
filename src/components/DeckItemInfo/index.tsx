@@ -81,7 +81,9 @@ const DeckItemInfo: React.FC<Props> = ({ item, onClick }) => {
               <Input
                 type="text"
                 value={content}
-                disabled
+                onChange={event => {
+                  setContent(event.target.value)
+                }}
               />
             </InputField>
             {item.type === 'Program' && (

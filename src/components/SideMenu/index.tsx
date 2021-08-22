@@ -22,14 +22,26 @@ const SideMenu: React.FC = () => {
   return (
     <Container>
       <Menu>
-        <MenuItem icon={<FiList size={30} />} name="Features" />
-        <MenuItem icon={<FiGlobe size={30} />} name="Website" />
-        <MenuItem icon={<FiFolder size={30} />} name="Folder" />
-        <MenuItem icon={<FiMonitor size={30} />} name="Program" />
-        <MenuItem icon={<FiGitMerge size={30} />} name="Shortcut" />
+        <MenuItem name="Features">
+          <FiList size={30} />
+        </MenuItem>
+        <MenuItem name="Website">
+          <FiGlobe size={30} />
+        </MenuItem>
+        <MenuItem name="Folder">
+          <FiFolder size={30} />
+        </MenuItem>
+        <MenuItem name="Program">
+          <FiMonitor size={30} />
+        </MenuItem>
+        <MenuItem name="Shortcut">
+          <FiGitMerge size={30} />
+        </MenuItem>
       </Menu>
       <Settings>
-        <FiSettings style={{ cursor: 'pointer' }} size={30} onClick={handleNavigateToSettings} />
+        <button onClick={handleNavigateToSettings}>
+          <FiSettings size={30} />
+        </button>
       </Settings>
     </Container>
   )

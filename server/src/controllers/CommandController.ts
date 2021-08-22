@@ -1,18 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
-import opener from 'opener'
+import openOnDesktop from 'opener'
 import robot from 'robotjs'
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace Express {
-    interface Request {
-      io: any;
-      client: any;
-      commands: any;
-      storage: string;
-    }
-  }
-}
 
 class CommandController {
   index (req: Request, res: Response): Response {
@@ -25,22 +13,16 @@ class CommandController {
     const command = {
       icon,
       name,
-      type
+      type,
+      position,
+      content
     }
 
     if (type === 'Folder') {
-      req.commands[position] = {
-        ...command,
-        position,
-        content: []
-      }
-    } else {
-      req.commands[position] = {
-        ...command,
-        position,
-        content
-      }
+      command.content = []
     }
+
+    req.commands[position] = command
 
     req.io.to(req.client).emit('new-command', req.commands)
 
@@ -53,37 +35,31 @@ class CommandController {
     const command = {
       icon,
       name,
-      type
+      type,
+      position,
+      content
     }
 
     if (type === 'Folder') {
-      req.commands[position] = {
-        ...command,
-        position,
-        content: []
-      }
-    } else {
-      req.commands[position] = {
-        ...command,
-        position,
-        content
-      }
+      command.content = []
     }
+
+    req.commands[position] = command
 
     req.io.to(req.client).emit('new-command', req.commands)
 
     return next()
   }
 
-  execute (req: Request, res: Response): Response {
-    const { position }: any = req.params
+  execute (req: Request<{ position: string }>, res: Response): Response {
+    const position = parseInt(req.params.position)
 
     const type = req.commands[position].type
     let content = req.commands[position].content
 
     if (type === 'Program' || type === 'Website') {
       // Execute command
-      opener(content)
+      openOnDesktop(content)
     } else if (type === 'Shortcut') {
       content = JSON.parse(content)
 

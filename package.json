@@ -14,10 +14,11 @@
     "dist": "npm-run-all dist:electron dist:react && electron .",
     "dist:electron": "webpack --config webpack/electron.webpack.js",
     "dist:react": "webpack --config webpack/react.webpack.js",
-    "test": "jest"
+    "test": "jest",
+    "rebuild": "npm rebuild --runtime=electron --target=9.0.5 --disturl=https://atom.io/download/atom-shell --abi=80"
   },
   "build": {
-    "appId": "com.electron.deck",
+    "appId": "com.iamtheluiz.deck",
     "win": {
       "target": "NSIS"
     },

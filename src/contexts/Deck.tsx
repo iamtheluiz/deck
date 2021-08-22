@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import api from '../services/api'
 import { DeckItem } from '../@types/DeckItem'
+
+import api from '../services/api'
 
 interface DeckContextData {
   items: DeckItem[],
@@ -15,23 +16,23 @@ export const DeckProvider: React.FC = ({ children }) => {
   const [items, setItems] = useState<DeckItem[]>([])
 
   useEffect(() => {
-    api.get('/').then(response => {
-      setItems(response.data)
-    })
+    async function getCommands () {
+      const { data: commandList } = await api.get('/')
+      setItems(commandList)
+    }
+    getCommands()
   }, [])
 
-  function addNewCommand (position: number, command: DeckItem, type: string) {
-    api.post('/command', { position, ...command, type })
-      .then(({ data }) => {
-        setItems(data)
-      })
+  async function addNewCommand (position: number, command: DeckItem, type: string) {
+    const { data: updatedCommandList } = await api.post('/command', { position, ...command, type })
+
+    setItems(updatedCommandList)
   }
 
-  function updateCommand (command: DeckItem) {
-    api.put('/command', command)
-      .then(({ data }) => {
-        setItems(data)
-      })
+  async function updateCommand (command: DeckItem) {
+    const { data: updatedCommandList } = await api.put('/command', command)
+
+    setItems(updatedCommandList)
   }
 
   return (
