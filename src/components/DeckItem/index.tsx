@@ -32,11 +32,13 @@ const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
   function addCommand (item: { type: string, value: string }) {
     const commandType = item.value
 
-    addNewCommand(position, {
+    addNewCommand({
+      position,
       name: '-',
       icon: 'https://cdn0.iconfinder.com/data/icons/social-network-7/50/16-512.png',
-      content: 'https://www.twitch.tv/'
-    }, commandType)
+      content: 'https://www.twitch.tv/',
+      type: commandType
+    })
   }
 
   return (

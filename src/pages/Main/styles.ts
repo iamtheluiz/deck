@@ -30,4 +30,17 @@ export const Deck = styled.div`
   gap: 4px;
 
   width: 638px;
+
+  &::before {
+    content: '';
+    width: 0;
+    padding-bottom: 100%;
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+  }
+
+  & > *:first-child{
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+  }
 `

@@ -1,16 +1,18 @@
 import React, { useContext, useState } from 'react'
-import { DeckItem } from '../../@types/DeckItem'
+import { DeckItem } from '../../../@types/DeckItem'
 import DeckContext from '../../contexts/Deck'
 
+// Components
+import SideMenu from '../../components/SideMenu'
+import DeckItemComponent from '../../components/DeckItem'
+import DeckItemInfo from '../../components/DeckItemInfo'
+
+// Styles
 import {
   Container,
   DeckContainer,
   Deck
 } from './styles'
-
-import SideMenu from '../../components/SideMenu'
-import DeckItemComponent from '../../components/DeckItem'
-import DeckItemInfo from '../../components/DeckItemInfo'
 
 const Main: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<DeckItem | null>(null)

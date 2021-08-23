@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FormEvent, useContext } from 'react'
 import { FiX } from 'react-icons/fi'
-import { DeckItem } from '../../@types/DeckItem'
+import { DeckItem } from '../../../@types/DeckItem'
 import DeckContext from '../../contexts/Deck'
 
 import { Modal, Close, Image, Details, InputContainer, InputField, Input, Label, Button } from './styles'
