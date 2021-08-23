@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { DeckItem } from '../../../@types/DeckItem'
+import { DeckItem } from '../../@types/DeckItem'
 
 export default function getCommandList (commands: DeckItem[]): DeckItem[] {
   // Insert default values

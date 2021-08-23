@@ -6,8 +6,8 @@ import socket from 'socket.io'
 
 import { DeckItem } from '../@types/DeckItem'
 
-import routes from './src/routes'
-import getCommandList from './src/lib/getCommandList'
+import routes from './routes'
+import getCommandList from './lib/getCommandList'
 
 const port = 4531
 const app = express()
