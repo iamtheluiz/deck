@@ -11,7 +11,7 @@ interface Props {
 
 const MenuItem: React.FC<Props> = ({ name, children }) => {
   const [, drag] = useDrag({
-    item: { type: ItemTypes.COMMAND, value: name },
+    item: { type: ItemTypes.COMMAND, value: name, position: -1 },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging()
     })

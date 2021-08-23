@@ -51,6 +51,16 @@ class CommandController {
     return next()
   }
 
+  remove (req: Request, res: Response, next: NextFunction): void {
+    const position = parseInt(req.params.position)
+
+    req.commands[position] = { position: -1 }
+
+    req.io.to(req.client).emit('new-command', req.commands)
+
+    return next()
+  }
+
   execute (req: Request<{ position: string }>, res: Response): Response {
     const position = parseInt(req.params.position)
 

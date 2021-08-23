@@ -6,8 +6,9 @@ import api from '../services/api'
 interface DeckContextData {
   items: DeckItem[],
   setItems(commandList: DeckItem[]): void,
-  addNewCommand(command: DeckItem): void,
-  updateCommand(command: DeckItem): void
+  addNewCommand(command: DeckItem): Promise<void>,
+  updateCommand(command: DeckItem): Promise<void>,
+  removeCommand(command: DeckItem): Promise<void>
 }
 
 const DeckContext = React.createContext<DeckContextData>({} as DeckContextData)
@@ -36,12 +37,19 @@ export const DeckProvider: React.FC = ({ children }) => {
     setItems(updatedCommandList)
   }
 
+  async function removeCommand (command: DeckItem) {
+    const { data: updatedCommandList } = await api.delete(`/command/${command.position}`)
+
+    setItems(updatedCommandList)
+  }
+
   return (
     <DeckContext.Provider value={{
       items,
       setItems,
       addNewCommand,
-      updateCommand
+      updateCommand,
+      removeCommand
     }}>
       {children}
     </DeckContext.Provider>

@@ -1,3 +1,4 @@
 export const ItemTypes = {
-  COMMAND: 'command'
+  COMMAND: 'command',
+  MOVE_COMMAND: 'move_command'
 }

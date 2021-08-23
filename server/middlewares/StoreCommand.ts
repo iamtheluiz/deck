@@ -8,11 +8,8 @@ const store = (req: Request, res: Response): Response => {
     JSON.stringify(req.commands),
     function (err) {
       if (err) throw err
-      console.log('complete')
     }
   )
-
-  console.log(req.commands)
 
   return res.json(req.commands)
 }
