@@ -3,6 +3,7 @@ import { useDrag, useDrop } from 'react-dnd'
 import { DeckItem as DeckItemProps } from '../../../@types/DeckItem'
 import { ItemTypes } from '../../Constants'
 import DeckContext from '../../contexts/Deck'
+import mergeRefs from '../../utils/mergeRefs'
 
 import { Container, Image } from './styles'
 
@@ -14,21 +15,6 @@ interface Props {
 
 const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
   const { addNewCommand, removeCommand } = useContext(DeckContext)
-
-  const mergeRefs = (...refs: any[]) => {
-    const filteredRefs = refs.filter(Boolean)
-    if (!filteredRefs.length) return null
-    if (filteredRefs.length === 0) return filteredRefs[0]
-    return (inst: any) => {
-      for (const ref of filteredRefs) {
-        if (typeof ref === 'function') {
-          ref(inst)
-        } else if (ref) {
-          ref.current = inst
-        }
-      }
-    }
-  }
 
   const [{ isOver }, drop] = useDrop({
     accept: ItemTypes.COMMAND,
