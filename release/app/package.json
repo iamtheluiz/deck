@@ -12,7 +12,10 @@
   "scripts": {
     "rebuild": "node -r ts-node/register ../../.erb/scripts/electron-rebuild.js",
     "postinstall": "npm run rebuild && npm run link-modules",
-    "link-modules": "node -r ts-node/register ../../.erb/scripts/link-modules.ts"
+    "link-modules": "node -r ts-node/register ../../.erb/scripts/link-modules.ts",
+    "rebuild:robotjs": "electron-rebuild --target=23.0.0 --disturl=https://atom.io/download/atom-shell --abi=108"
   },
-  "dependencies": {}
+  "dependencies": {
+    "robotjs": "^0.6.0"
+  }
 }
