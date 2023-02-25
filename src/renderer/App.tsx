@@ -11,7 +11,7 @@ import { DeckProvider } from './contexts/Deck';
 import { GlobalStyle } from './styles/GlobalStyle';
 
 // Components
-import ApplicationHeader from './components/ApplicationHeader';
+// import ApplicationHeader from './components/ApplicationHeader';
 
 // Pages
 import Main from './pages/Main';
@@ -25,7 +25,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <ApplicationHeader />
+      {/* <ApplicationHeader /> */}
       <DeckProvider>
         <DndProvider backend={HTML5Backend}>
           <BrowserRouter>

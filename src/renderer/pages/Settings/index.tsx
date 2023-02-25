@@ -1,22 +1,19 @@
-import React from 'react'
-import { FiArrowLeft } from 'react-icons/fi'
-import { useHistory } from 'react-router-dom'
-import QRCode from 'qrcode.react'
-import ip from 'ip'
+import React from 'react';
+import { FiArrowLeft } from 'react-icons/fi';
+import { useHistory } from 'react-router-dom';
+import QRCode from 'qrcode.react';
+import ip from 'ip';
 
-import {
-  LocalStyle,
-  Container,
-  QRCodeContainer
-} from './styles'
+import { LocalStyle, Container, QRCodeContainer } from './styles';
 
-const address = ip.address()
+const address = ip.address();
 
+// eslint-disable-next-line react/function-component-definition
 const Settings: React.FC = () => {
-  const history = useHistory()
+  const history = useHistory();
 
-  function handleNavigateToHome () {
-    history.push('/')
+  function handleNavigateToHome() {
+    history.push('/');
   }
 
   return (
@@ -31,7 +28,7 @@ const Settings: React.FC = () => {
         </QRCodeContainer>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default Settings
+export default Settings;

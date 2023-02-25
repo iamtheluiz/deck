@@ -1,17 +1,18 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.aside`
   display: flex;
   flex-direction: column;
   width: 300px;
-  height: calc(100vh - 32px);
+  /* height: calc(100vh - 32px); */
+  height: calc(100vh);
   padding: 8px;
-  background-color: #13293D;
-`
+  background-color: #13293d;
+`;
 
 export const Menu = styled.div`
   flex: 1;
-`
+`;
 
 export const Settings = styled.div`
   display: flex;
@@ -27,4 +28,4 @@ export const Settings = styled.div`
     cursor: pointer;
     color: white;
   }
-`
+`;

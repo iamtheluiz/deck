@@ -1,14 +1,15 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Container = styled.main<{ fade: boolean }>`
   display: flex;
   align-items: center;
 
   width: 100%;
-  height: calc(100vh - 32px);
+  /* height: calc(100vh - 32px); */
+  height: calc(100vh);
 
-  filter: blur(${props => props.fade ? '5px' : '0px'});
-`
+  filter: blur(${(props) => (props.fade ? '5px' : '0px')});
+`;
 
 export const DeckContainer = styled.div`
   display: flex;
@@ -19,7 +20,7 @@ export const DeckContainer = styled.div`
 
   width: 100%;
   height: 100%;
-`
+`;
 
 export const Deck = styled.div`
   overflow: auto;
@@ -39,8 +40,8 @@ export const Deck = styled.div`
     grid-column: 1 / 1;
   }
 
-  & > *:first-child{
+  & > *:first-child {
     grid-row: 1 / 1;
     grid-column: 1 / 1;
   }
-`
+`;

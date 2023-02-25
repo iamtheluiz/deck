@@ -102,7 +102,7 @@ const createWindow = async () => {
     minWidth: 1000,
     backgroundColor: '#16324F',
     icon: getAssetPath('icon.jpg'),
-    frame: false,
+    // frame: false,
     title: 'Deck',
     webPreferences: {
       nodeIntegration: true,
