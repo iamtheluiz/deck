@@ -23,7 +23,33 @@ class AppUpdater {
   }
 }
 
+// const devMode = (process.argv || []).indexOf('--dev') !== -1;
+
+// load the app dependencies in dev mode
+if (process.env.NODE_ENV === 'development') {
+  const PATH_APP_NODE_MODULES = path.join(
+    __dirname,
+    '..',
+    '..',
+    'release',
+    'app',
+    'node_modules'
+  );
+  const Module = require('module');
+
+  // for electron 17 or higher
+  // eslint-disable-next-line no-underscore-dangle
+  const nodeModulePaths = Module._nodeModulePaths;
+  // eslint-disable-next-line no-underscore-dangle
+  Module._nodeModulePaths = (from: any) =>
+    nodeModulePaths(from).concat([PATH_APP_NODE_MODULES]);
+}
+
 let mainWindow: BrowserWindow | null = null;
+
+require('@electron/remote/main').initialize();
+
+require('../server/server');
 
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
@@ -71,15 +97,23 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
-    icon: getAssetPath('icon.png'),
+    width: 1100,
+    height: 700,
+    minWidth: 1000,
+    backgroundColor: '#16324F',
+    icon: getAssetPath('icon.jpg'),
+    frame: false,
+    title: 'Deck',
     webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
       preload: app.isPackaged
         ? path.join(__dirname, 'preload.js')
         : path.join(__dirname, '../../.erb/dll/preload.js'),
     },
   });
+
+  require('@electron/remote/main').enable(mainWindow);
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 

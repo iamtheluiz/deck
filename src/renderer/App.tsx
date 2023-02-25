@@ -1,50 +1,41 @@
-import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
-import './App.css';
+import React from 'react';
+import { render } from 'react-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-function Hello() {
-  return (
-    <div>
-      <div className="Hello">
-        <img width="200" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="folded hands">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
-    </div>
-  );
-}
+// Drag and Drop
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DeckProvider } from './contexts/Deck';
+
+// Styles
+import { GlobalStyle } from './styles/GlobalStyle';
+
+// Components
+import ApplicationHeader from './components/ApplicationHeader';
+
+// Pages
+import Main from './pages/Main';
+import Settings from './pages/Settings';
+
+const mainElement = document.createElement('div');
+mainElement.setAttribute('id', 'root');
+document.body.appendChild(mainElement);
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Hello />} />
-      </Routes>
-    </Router>
+    <>
+      <GlobalStyle />
+      <ApplicationHeader />
+      <DeckProvider>
+        <DndProvider backend={HTML5Backend}>
+          <BrowserRouter>
+            <Switch>
+              <Route path="/settings" exact component={Settings} />
+              <Route path="*" component={Main} />
+            </Switch>
+          </BrowserRouter>
+        </DndProvider>
+      </DeckProvider>
+    </>
   );
 }
