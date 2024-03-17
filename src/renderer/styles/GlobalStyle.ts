@@ -1,27 +1,28 @@
-import { createGlobalStyle } from 'styled-components'
+// import { createGlobalStyle } from 'styled-components';
 
-export const GlobalStyle = createGlobalStyle`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    user-select: none;
-    outline: 0;
-    outline-color: transparent;
-  }
+// // eslint-disable-next-line import/prefer-default-export
+// export const GlobalStyle = createGlobalStyle`
+//   * {
+//     margin: 0;
+//     padding: 0;
+//     box-sizing: border-box;
+//     user-select: none;
+//     outline: 0;
+//     outline-color: transparent;
+//   }
 
-  /* width */
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
+//   /* width */
+//   ::-webkit-scrollbar {
+//     width: 8px;
+//   }
 
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #FFFFFF30;
-  }
+//   /* Handle */
+//   ::-webkit-scrollbar-thumb {
+//     background: #FFFFFF30;
+//   }
 
-  html, body {
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-`
+//   html, body {
+//     color: white;
+//     font-family: Arial, Helvetica, sans-serif;
+//   }
+// `;

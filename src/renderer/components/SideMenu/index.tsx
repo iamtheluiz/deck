@@ -1,50 +1,60 @@
-import React from 'react'
 import {
-  FiList,
   FiGitMerge,
   FiGlobe,
   FiFolder,
   FiMonitor,
-  FiSettings
-} from 'react-icons/fi'
-import { useHistory } from 'react-router-dom'
-import MenuItem from '../../components/MenuItem'
+  FiSettings,
+  FiTrash,
+} from 'react-icons/fi';
+import { useHistory } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import DeckContext from 'renderer/contexts/Deck';
+import MenuItem from '../MenuItem';
+import { Button } from '../ui/button';
 
-import { Container, Menu, Settings } from './styles'
+export default function SideMenu() {
+  const { items, resetCommandList } = useContext(DeckContext);
+  const history = useHistory();
 
-const SideMenu: React.FC = () => {
-  const history = useHistory()
-
-  function handleNavigateToSettings () {
-    history.push('/settings')
+  function handleNavigateToSettings() {
+    history.push('/settings');
   }
 
+  async function handleRemoveAllCommands() {
+    await resetCommandList();
+  }
+
+  useEffect(() => {
+    console.table(items);
+  }, [items]);
+
   return (
-    <Container>
-      <Menu>
-        <MenuItem name="Features">
-          <FiList size={30} />
-        </MenuItem>
+    <aside className="flex flex-1 flex-col p-2 min-w-64 border-r border-input">
+      <h3 className="mt-2 mb-2 scroll-m-20 text-xl font-semibold tracking-tight text-center">
+        Commands
+      </h3>
+      <div className="flex flex-1 flex-col gap-1">
         <MenuItem name="Website">
-          <FiGlobe size={30} />
+          <FiGlobe size={16} />
         </MenuItem>
         <MenuItem name="Folder">
-          <FiFolder size={30} />
+          <FiFolder size={16} />
         </MenuItem>
         <MenuItem name="Program">
-          <FiMonitor size={30} />
+          <FiMonitor size={16} />
         </MenuItem>
         <MenuItem name="Shortcut">
-          <FiGitMerge size={30} />
+          <FiGitMerge size={16} />
         </MenuItem>
-      </Menu>
-      <Settings>
-        <button onClick={handleNavigateToSettings}>
-          <FiSettings size={30} />
-        </button>
-      </Settings>
-    </Container>
-  )
+      </div>
+      <div className="flex flex-row gap-1">
+        <Button variant="outline" onClick={handleNavigateToSettings}>
+          <FiSettings size={16} />
+        </Button>
+        <Button variant="outline" onClick={handleRemoveAllCommands}>
+          <FiTrash size={16} />
+        </Button>
+      </div>
+    </aside>
+  );
 }
-
-export default SideMenu

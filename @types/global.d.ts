@@ -1,10 +1,10 @@
-import socket from 'socket.io'
-import { DeckItem } from './DeckItem'
+/* eslint-disable no-unused-vars */
+import socket from 'socket.io';
+import { DeckItem } from './DeckItem';
 
-export {}
+export {};
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     interface Request {
       io: socket.Server;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.main<{ fade: boolean }>`
-  display: flex;
+  /* display: flex; */
   align-items: center;
 
   width: 100%;

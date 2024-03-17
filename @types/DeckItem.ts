@@ -1,7 +1,7 @@
 export interface DeckItem {
-  position: number,
-  icon?: string,
-  name?: string,
-  type?: string,
-  content?: any,
+  position: number;
+  icon?: string;
+  name?: string;
+  type?: string;
+  content?: any;
 }

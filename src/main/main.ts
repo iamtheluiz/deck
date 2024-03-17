@@ -100,7 +100,7 @@ const createWindow = async () => {
     width: 1100,
     height: 700,
     minWidth: 1000,
-    backgroundColor: '#16324F',
+    // backgroundColor: '#16324F',
     icon: getAssetPath('icon.jpg'),
     // frame: false,
     title: 'Deck',

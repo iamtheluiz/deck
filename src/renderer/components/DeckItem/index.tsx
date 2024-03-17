@@ -5,7 +5,8 @@ import { ItemTypes } from '../../Constants';
 import DeckContext from '../../contexts/Deck';
 import mergeRefs from '../../utils/mergeRefs';
 
-import { Container, Image } from './styles';
+import { Image } from './styles';
+import { Button } from '../ui/button';
 
 interface Props {
   item: DeckItemProps;
@@ -80,7 +81,9 @@ const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
   });
 
   return (
-    <Container
+    <Button
+      variant="outline"
+      className="h-[121px] p-0"
       onClick={item.position !== -1 ? onClick : undefined}
       ref={
         item.position === -1
@@ -98,7 +101,7 @@ const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
       }
     >
       {item.icon && <Image src={item.icon} />}
-    </Container>
+    </Button>
   );
 };
 

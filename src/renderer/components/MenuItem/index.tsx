@@ -1,9 +1,8 @@
 import React from 'react';
 import { useDrag } from 'react-dnd';
-import { FiChevronRight } from 'react-icons/fi';
 import { ItemTypes } from '../../Constants';
 
-import { Container, Text } from './styles';
+import { Button } from '../ui/button';
 
 interface Props {
   name: string;
@@ -21,11 +20,10 @@ const MenuItem: React.FC<Props> = ({ name, children }) => {
   });
 
   return (
-    <Container ref={drag}>
-      {name !== 'Features' && <FiChevronRight size={20} />}
+    <Button variant="outline" ref={drag} className="gap-2 justify-start">
       {children}
-      <Text>{name}</Text>
-    </Container>
+      {name}
+    </Button>
   );
 };
 

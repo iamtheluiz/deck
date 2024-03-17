@@ -6,8 +6,9 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DeckProvider } from './contexts/Deck';
 
 // Styles
-import { GlobalStyle } from './styles/GlobalStyle';
-import 'tailwindcss/tailwind.css';
+// import { GlobalStyle } from './styles/GlobalStyle';
+// import 'tailwindcss/tailwind.css';
+import './App.css';
 
 // Components
 // import ApplicationHeader from './components/ApplicationHeader';
@@ -23,18 +24,20 @@ document.body.appendChild(mainElement);
 export default function App() {
   return (
     <>
-      <GlobalStyle />
+      {/* <GlobalStyle /> */}
       {/* <ApplicationHeader /> */}
-      <DeckProvider>
-        <DndProvider backend={HTML5Backend}>
-          <BrowserRouter>
-            <Switch>
-              <Route path="/settings" exact component={Settings} />
-              <Route path="*" component={Main} />
-            </Switch>
-          </BrowserRouter>
-        </DndProvider>
-      </DeckProvider>
+      <div className="bg-background text-white h-screen">
+        <DeckProvider>
+          <DndProvider backend={HTML5Backend}>
+            <BrowserRouter>
+              <Switch>
+                <Route path="/settings" exact component={Settings} />
+                <Route path="*" component={Main} />
+              </Switch>
+            </BrowserRouter>
+          </DndProvider>
+        </DeckProvider>
+      </div>
     </>
   );
 }
