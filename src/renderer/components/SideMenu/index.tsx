@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import DeckContext from 'renderer/contexts/Deck';
 import MenuItem from '../MenuItem';
-import { Button } from '../ui/button';
+import { Button } from '@/ui/button';
 
 export default function SideMenu() {
   const { items, resetCommandList } = useContext(DeckContext);

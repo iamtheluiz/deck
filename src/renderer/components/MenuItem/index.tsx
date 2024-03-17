@@ -2,7 +2,7 @@ import React from 'react';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../../Constants';
 
-import { Button } from '../ui/button';
+import { Button } from '@/ui/button';
 
 interface Props {
   name: string;

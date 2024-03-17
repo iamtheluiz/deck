@@ -6,7 +6,7 @@ import DeckContext from '../../contexts/Deck';
 import mergeRefs from '../../utils/mergeRefs';
 
 import { Image } from './styles';
-import { Button } from '../ui/button';
+import { Button } from '@/ui/button';
 
 interface Props {
   item: DeckItemProps;
