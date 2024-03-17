@@ -1,5 +1,3 @@
-import React from 'react';
-import { render } from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 // Drag and Drop
@@ -9,6 +7,7 @@ import { DeckProvider } from './contexts/Deck';
 
 // Styles
 import { GlobalStyle } from './styles/GlobalStyle';
+import 'tailwindcss/tailwind.css';
 
 // Components
 // import ApplicationHeader from './components/ApplicationHeader';
