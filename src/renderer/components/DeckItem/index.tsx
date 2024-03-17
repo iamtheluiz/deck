@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
+import { FiEdit, FiTrash } from 'react-icons/fi';
 import { DeckItem as DeckItemProps } from '../../../../@types/DeckItem';
 import { ItemTypes } from '../../Constants';
 import DeckContext from '../../contexts/Deck';
@@ -7,6 +8,12 @@ import mergeRefs from '../../utils/mergeRefs';
 
 import { Image } from './styles';
 import { Button } from '@/ui/button';
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from '@/ui/context-menu';
 
 interface Props {
   item: DeckItemProps;
@@ -80,28 +87,42 @@ const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
     }),
   });
 
+  function handleDeleteDeckItem() {
+    removeCommand(item);
+  }
+
   return (
-    <Button
-      variant="outline"
-      className="h-[121px] p-0"
-      onClick={item.position !== -1 ? onClick : undefined}
-      ref={
-        item.position === -1
-          ? mergeRefs(drop, moveCommandDrop)
-          : mergeRefs(drop, moveCommandDrop, moveCommandDrag)
-      }
-      style={
-        isOver
-          ? {
-              borderWidth: 2,
-              borderColor: '#FFFFFF60',
-              borderStyle: 'solid',
-            }
-          : {}
-      }
-    >
-      {item.icon && <Image src={item.icon} />}
-    </Button>
+    <ContextMenu>
+      <ContextMenuTrigger className="w-full" disabled={item.position === -1}>
+        <Button
+          variant="outline"
+          className="h-[121px] w-full p-0"
+          onClick={item.position !== -1 ? onClick : undefined}
+          ref={
+            item.position === -1
+              ? mergeRefs(drop, moveCommandDrop)
+              : mergeRefs(drop, moveCommandDrop, moveCommandDrag)
+          }
+          style={
+            isOver
+              ? {
+                  borderWidth: 2,
+                  borderColor: '#FFFFFF60',
+                  borderStyle: 'solid',
+                }
+              : {}
+          }
+        >
+          {item.icon && <Image src={item.icon} />}
+        </Button>
+      </ContextMenuTrigger>
+      <ContextMenuContent>
+        <ContextMenuItem className="gap-1" onClick={handleDeleteDeckItem}>
+          <FiTrash size={16} />
+          Delete
+        </ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
   );
 };
 
