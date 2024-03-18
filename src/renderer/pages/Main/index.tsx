@@ -16,9 +16,9 @@ const Main: React.FC = () => {
   const { items } = useContext(DeckContext);
 
   return (
-    <div className="flex h-full flex-row">
+    <div className="flex h-full flex-row flex-1">
       <SideMenu />
-      <div className="flex flex-row w-full h-full">
+      <div className="flex flex-row flex-1">
         <div className="flex flex-col justify-center items-center flex-1 h-full w-full">
           <div className="grid grid-cols-5 grid-rows-4 gap-2 w-[638px]">
             {items.map((item, index) => (

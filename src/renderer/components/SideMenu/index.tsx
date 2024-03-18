@@ -9,8 +9,8 @@ import {
 import { useHistory } from 'react-router-dom';
 import { useContext } from 'react';
 import DeckContext from 'renderer/contexts/Deck';
-import MenuItem from '../MenuItem';
 import { Button } from '@/ui/button';
+import MenuItem from '../MenuItem';
 
 export default function SideMenu() {
   const { resetCommandList } = useContext(DeckContext);
@@ -25,7 +25,7 @@ export default function SideMenu() {
   }
 
   return (
-    <aside className="flex flex-1 flex-col p-2 min-w-64 border-r border-input">
+    <aside className="flex flex-col p-2 min-w-64 border-r border-input">
       <h3 className="mt-2 mb-2 scroll-m-20 text-xl font-semibold tracking-tight text-center">
         Commands
       </h3>

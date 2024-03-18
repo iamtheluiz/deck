@@ -9,7 +9,7 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron';
+import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -106,6 +106,7 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
+    frame: false,
     width: 1100,
     height: 700,
     minWidth: 1000,

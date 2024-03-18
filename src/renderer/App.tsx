@@ -16,6 +16,7 @@ import './App.css';
 // Pages
 import Main from './pages/Main';
 import Settings from './pages/Settings';
+import ApplicationHeader from './components/ApplicationHeader';
 
 const mainElement = document.createElement('div');
 mainElement.setAttribute('id', 'root');
@@ -26,7 +27,8 @@ export default function App() {
     <>
       {/* <GlobalStyle /> */}
       {/* <ApplicationHeader /> */}
-      <div className="bg-background text-white h-screen">
+      <div className="flex flex-col bg-background text-white min-h-screen">
+        <ApplicationHeader />
         <DeckProvider>
           <DndProvider backend={HTML5Backend}>
             <BrowserRouter>
