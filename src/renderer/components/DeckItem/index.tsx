@@ -1,11 +1,6 @@
 import React, { useContext } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { FiEdit, FiPlay, FiTrash } from 'react-icons/fi';
-import { DeckItem as DeckItemProps } from '../../../../@types/DeckItem';
-import { ItemTypes } from '../../Constants';
-import DeckContext from '../../contexts/Deck';
-import mergeRefs from '../../utils/mergeRefs';
-
 import { Button } from '@/ui/button';
 import {
   ContextMenu,
@@ -13,6 +8,11 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from '@/ui/context-menu';
+
+import { DeckItem as DeckItemProps } from '../../../../@types/DeckItem';
+import { ItemTypes } from '../../Constants';
+import DeckContext from '../../contexts/Deck';
+import mergeRefs from '../../utils/mergeRefs';
 
 interface Props {
   item: DeckItemProps;

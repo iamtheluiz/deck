@@ -2,6 +2,7 @@ import express, { Request } from 'express';
 import path from 'path';
 import http from 'http';
 import cors from 'cors';
+import fs from 'fs';
 import { Server } from 'socket.io';
 
 import { DeckItem } from '../../@types/DeckItem';
@@ -28,7 +29,6 @@ app.use((req: Request, res, next) => {
   req.io = io;
   req.client = client;
   req.commands = commands;
-  req.storage = path.resolve(__dirname, 'storage.json');
 
   return next();
 });
