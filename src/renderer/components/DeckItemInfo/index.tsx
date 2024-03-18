@@ -51,12 +51,6 @@ const DeckItemInfo: React.FC<Props> = ({ item, closeModal }) => {
       properties: ['openFile'],
     });
     setContent(filePaths[0]);
-    // ipcRenderer.emit('deck-item-info-open-dialog');
-
-    // ipcRenderer.once('deck-item-info-dialog-selected-path', (arg) => {
-    //   console.log(arg);
-    //   setContent(arg);
-    // });
   }
 
   return (

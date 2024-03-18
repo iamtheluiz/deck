@@ -57,8 +57,7 @@ ipcMain.on('ipc-example', async (event, arg) => {
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
-ipcMain.on('deck-item-info-open-dialog', async (event, arg) => {
-  console.log('Aqui!');
+ipcMain.on('deck-item-info-open-dialog', async (event) => {
   const { filePaths } = await dialog.showOpenDialog({
     properties: ['openFile'],
   });

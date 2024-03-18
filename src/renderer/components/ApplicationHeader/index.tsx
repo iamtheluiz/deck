@@ -19,7 +19,7 @@ function NoDragButton({
       variant="ghost"
       style={{
         // @ts-ignore
-        '-webkit-app-region': 'no-drag',
+        WebkitAppRegion: 'no-drag',
       }}
     >
       {children}
@@ -56,7 +56,7 @@ const ApplicationHeader: React.FC = () => {
       className="flex items-center w-full h-9 border-b border-input"
       style={{
         // @ts-ignore
-        '-webkit-app-region': 'drag',
+        WebkitAppRegion: 'drag',
       }}
     >
       <div className="flex flex-row items-center flex-1 h-full pl-1">
