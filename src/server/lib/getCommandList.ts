@@ -12,7 +12,6 @@ export default function getCommandList(commands: DeckItem[]): DeckItem[] {
     // eslint-disable-next-line no-param-reassign
     commands = JSON.parse(String(data));
   } else {
-    console.log('Creating');
     fs.writeFileSync('storage.json', JSON.stringify(commands));
   }
 

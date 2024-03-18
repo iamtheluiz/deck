@@ -1,8 +1,6 @@
 import express, { Request } from 'express';
-import path from 'path';
 import http from 'http';
 import cors from 'cors';
-import fs from 'fs';
 import { Server } from 'socket.io';
 
 import { DeckItem } from '../../@types/DeckItem';
@@ -39,5 +37,6 @@ app.use(cors());
 app.use(routes);
 
 server.listen(port, () => {
+  // eslint-disable-next-line no-console
   console.log(`Application running at 'localhost:${port}'`);
 });
