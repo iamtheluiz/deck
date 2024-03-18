@@ -1,28 +1,27 @@
-import React, { useState, useEffect, FormEvent, useContext } from 'react';
-import { FiX } from 'react-icons/fi';
+import React, { useState, useEffect, useContext } from 'react';
 import { dialog } from '@electron/remote';
 import { DeckItem } from '../../../../@types/DeckItem';
 import DeckContext from '../../contexts/Deck';
 
 import {
-  Modal,
-  Close,
-  Image,
-  Details,
-  InputContainer,
-  InputField,
-  Input,
-  Label,
-  Button,
-} from './styles';
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/ui/dialog';
+import { Input } from '@/ui/input';
+import { Button } from '@/ui/button';
+import { Label } from '@/ui/label';
 
 interface Props {
   item: DeckItem;
-  onClick(): void;
+  closeModal: () => void;
 }
 
 // eslint-disable-next-line react/function-component-definition
-const DeckItemInfo: React.FC<Props> = ({ item, onClick }) => {
+const DeckItemInfo: React.FC<Props> = ({ item, closeModal }) => {
   const { updateCommand } = useContext(DeckContext);
   const [name, setName] = useState<string>('');
   const [icon, setIcon] = useState<string>('');
@@ -34,9 +33,7 @@ const DeckItemInfo: React.FC<Props> = ({ item, onClick }) => {
     setContent(item.content ? item.content : '');
   }, [item]);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
+  async function handleSubmit() {
     const command = {
       ...item,
       name,
@@ -44,7 +41,8 @@ const DeckItemInfo: React.FC<Props> = ({ item, onClick }) => {
       content,
     };
 
-    updateCommand(command);
+    await updateCommand(command);
+    closeModal();
   }
 
   async function handleOpenDialog() {
@@ -56,54 +54,59 @@ const DeckItemInfo: React.FC<Props> = ({ item, onClick }) => {
   }
 
   return (
-    <Modal>
-      <Close onClick={onClick}>
-        <FiX size={20} />
-      </Close>
-      <Details onSubmit={handleSubmit}>
-        <InputContainer>
-          {icon && <Image src={icon} />}
-          <InputField>
-            <Label htmlFor="name">Name</Label>
-            <Input
-              type="text"
-              value={name}
-              onChange={(event: any) => {
-                setName(event.target.value);
-              }}
-            />
-          </InputField>
-
-          <InputField>
-            <Label htmlFor="icon">Icon</Label>
-            <Input
-              type="text"
-              value={icon}
-              onChange={(event: any) => {
-                setIcon(event.target.value);
-              }}
-            />
-          </InputField>
-
-          <br />
-          <InputField>
-            <Label htmlFor="content">Content</Label>
-            <Input
-              type="text"
-              value={content}
-              onChange={(event: any) => {
-                setContent(event.target.value);
-              }}
-            />
-          </InputField>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Edit item</DialogTitle>
+        <DialogDescription>
+          Change your deck item information.
+        </DialogDescription>
+      </DialogHeader>
+      <div className="flex items-center space-x-2">
+        <div className="grid flex-1 gap-2">
+          {icon && <img src={icon} alt="" className="w-32 m-auto" />}
+          <Label htmlFor="name">Name</Label>
+          <Input
+            id="name"
+            type="text"
+            value={name}
+            onChange={(event: any) => {
+              setName(event.target.value);
+            }}
+          />
+          <Label htmlFor="icon">Icon</Label>
+          <Input
+            id="icon"
+            type="text"
+            value={icon}
+            onChange={(event: any) => {
+              setIcon(event.target.value);
+            }}
+          />
+          <Label htmlFor="content">Content</Label>
+          <Input
+            id="content"
+            type="text"
+            value={content}
+            onChange={(event: any) => {
+              setContent(event.target.value);
+            }}
+          />
           {item.type === 'Program' && (
             <Button onClick={handleOpenDialog}>Select Program</Button>
           )}
-        </InputContainer>
-
-        <Button type="submit">Enviar</Button>
-      </Details>
-    </Modal>
+        </div>
+      </div>
+      <DialogFooter className="justify-end">
+        <DialogClose asChild>
+          <Button type="button" variant="secondary">
+            Close
+          </Button>
+        </DialogClose>
+        <Button type="button" variant="default" onClick={handleSubmit}>
+          Save
+        </Button>
+      </DialogFooter>
+    </DialogContent>
   );
 };
 

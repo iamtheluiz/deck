@@ -1,4 +1,12 @@
 import React, { useContext, useState } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/ui/dialog';
 import DeckContext from '../../contexts/Deck';
 
 import { DeckItem } from '../../../../@types/DeckItem';
@@ -19,7 +27,7 @@ const Main: React.FC = () => {
       <SideMenu />
       <div className="flex flex-row w-full h-full">
         <div className="flex flex-col justify-center items-center flex-1 h-full w-full">
-          <div className="overflow-auto grid grid-cols-5 grid-rows-4 gap-2 w-[638px]">
+          <div className="grid grid-cols-5 grid-rows-4 gap-2 w-[638px]">
             {items.map((item, index) => (
               <DeckItemComponent
                 // eslint-disable-next-line react/no-array-index-key
@@ -30,8 +38,20 @@ const Main: React.FC = () => {
               />
             ))}
           </div>
+          <Dialog
+            open={!!selectedItem}
+            onOpenChange={(status) =>
+              setSelectedItem(status === false ? null : selectedItem)
+            }
+          >
+            {selectedItem && (
+              <DeckItemInfo
+                item={selectedItem}
+                closeModal={() => setSelectedItem(null)}
+              />
+            )}
+          </Dialog>
         </div>
-        {/* <SideMenu /> */}
       </div>
     </div>
   );

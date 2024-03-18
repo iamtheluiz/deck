@@ -6,7 +6,6 @@ import { ItemTypes } from '../../Constants';
 import DeckContext from '../../contexts/Deck';
 import mergeRefs from '../../utils/mergeRefs';
 
-import { Image } from './styles';
 import { Button } from '@/ui/button';
 import {
   ContextMenu,
@@ -93,10 +92,13 @@ const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
 
   return (
     <ContextMenu>
-      <ContextMenuTrigger className="w-full" disabled={item.position === -1}>
+      <ContextMenuTrigger
+        className="w-full h-[121px]"
+        disabled={item.position === -1}
+      >
         <Button
           variant="outline"
-          className="h-[121px] w-full p-0"
+          className="h-full w-full p-0"
           onClick={item.position !== -1 ? onClick : undefined}
           ref={
             item.position === -1
@@ -113,10 +115,16 @@ const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
               : {}
           }
         >
-          {item.icon && <Image src={item.icon} />}
+          {item.icon && (
+            <img src={item.icon} alt="" className="w-full h-full rounded-md" />
+          )}
         </Button>
       </ContextMenuTrigger>
       <ContextMenuContent>
+        <ContextMenuItem className="gap-1" onClick={onClick}>
+          <FiEdit size={16} />
+          Edit
+        </ContextMenuItem>
         <ContextMenuItem className="gap-1" onClick={handleDeleteDeckItem}>
           <FiTrash size={16} />
           Delete
