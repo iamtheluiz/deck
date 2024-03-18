@@ -1,46 +1,72 @@
-# Deck
+# 💻 Deck
 
-## Boilerplate
+This is a application that allows you to use your smartphone as a control pad for your computer, launching programs and sites, using hotkeys and more.
 
-Boilerplate for a project using Electron, React and Typescript
+<p align="center">
+  <img src="assets/screenshots/home.png" alt="Project Interface" />
+  <span>Project Interface</span>
+</p>
 
-- [diego3g/electron-typescript-react](https://github.com/diego3g/electron-typescript-react)
+<p align="center">
+  <img alt="Typescript" src="https://img.shields.io/badge/-Typescript-44475a?logo=Typescript&logoColor=white" />
+  <img alt="React" src="https://img.shields.io/badge/-React-44475a?logo=react&logoColor=white" />
+  <img alt="Electron" src="https://img.shields.io/badge/-Electron-44475a?logo=Electron&logoColor=white" />
+</p>
 
-## Installation
+## 📂 Boilerplate
 
-Use a package manager of your choice (npm, yarn, etc.) in order to install all dependencies
+This project was bootstrapped with [Electron React Boilerplate](https://electron-react-boilerplate.js.org/).
+
+## 💻 Technologies
+
+* [Node](https://nodejs.org/en/)
+* [React](https://reactjs.org/)
+* [Electron](https://www.electronjs.org/)
+
+## 🏃 Getting Started
+
+First, clone this repository and access the created folder:
+
+```bash
+# Cloning repository
+git clone https://github.com/iamtheluiz/deck.git
+
+cd deck/
+```
+
+Inside the folder, install all project dependencies:
 
 ```bash
 npm install
-```
-
-```bash
+# or
 yarn install
 ```
 
-## Usage
+## 👨🏽‍💻 Usage
 
-In order to run this project 2 scripts will need to be executed `dev:react` and `dev:electron`, run each one in a different terminal and always run `dev:react` before `dev:electron`.
-
-```bash
-npm run dev:react
-```
-```bash
-npm run dev:electron
-```
-
-## Build
-
-To build this project, run:
+To run this project in a local environment use:
 
 ```bash
-yarn build
+npm run start
+# or
+yarn start
 ```
+
+## ⚙️ Package
+
+To create a package of this project, run:
+
+```bash
+npm run package
+# or
+yarn package
+```
+
+Await the script and you will have all generated files inside the "release/build" folder.
 
 ## 💼 Authors
 
 * **Luiz Gustavo** - *Development* - [iamtheluiz](https://github.com/iamtheluiz)
-
-## 📃 License
-
-This project is under the GNU General Public License - see the [LICENSE](LICENSE) file for details.
+  * Website: https://iamtheluiz.github.io
+  * Github: [@iamtheluiz](https://github.com/iamtheluiz)
+  * LinkedIn: [Luiz Gustavo da Silva Vasconcellos](https://www.linkedin.com/in/luiz-gustavo-da-silva-vasconcellos-05192a192?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BbQkVQ3sTTv6XCn%2FiToGGcA%3D%3D)
