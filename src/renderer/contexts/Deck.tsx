@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { DeckItem } from '../../@types/DeckItem';
 
 import api from '../services/api';
+import { DeckItem } from '../../../@types/DeckItem';
 
 interface DeckContextData {
   items: DeckItem[];
   setItems(commandList: DeckItem[]): void;
+  executeCommand(command: DeckItem): Promise<void>;
   addNewCommand(command: DeckItem): Promise<void>;
   updateCommand(command: DeckItem): Promise<void>;
   removeCommand(command: DeckItem): Promise<void>;
@@ -26,6 +27,10 @@ export const DeckProvider: React.FC = ({ children }) => {
     }
     getCommands();
   }, []);
+
+  async function executeCommand(command: DeckItem) {
+    await api.get(`/execute/${command.position}`);
+  }
 
   async function addNewCommand(command: DeckItem) {
     const { data: updatedCommandList } = await api.post('/command', command);
@@ -58,6 +63,7 @@ export const DeckProvider: React.FC = ({ children }) => {
       value={{
         items,
         setItems,
+        executeCommand,
         addNewCommand,
         updateCommand,
         removeCommand,

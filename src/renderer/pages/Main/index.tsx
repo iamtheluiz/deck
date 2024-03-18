@@ -1,12 +1,5 @@
 import React, { useContext, useState } from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/ui/dialog';
+import { Dialog } from '@/ui/dialog';
 import DeckContext from '../../contexts/Deck';
 
 import { DeckItem } from '../../../../@types/DeckItem';

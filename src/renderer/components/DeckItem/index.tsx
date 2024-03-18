@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { FiEdit, FiTrash } from 'react-icons/fi';
+import { FiEdit, FiPlay, FiTrash } from 'react-icons/fi';
 import { DeckItem as DeckItemProps } from '../../../../@types/DeckItem';
 import { ItemTypes } from '../../Constants';
 import DeckContext from '../../contexts/Deck';
@@ -22,7 +22,8 @@ interface Props {
 
 // eslint-disable-next-line react/function-component-definition
 const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
-  const { addNewCommand, removeCommand } = useContext(DeckContext);
+  const { addNewCommand, removeCommand, executeCommand } =
+    useContext(DeckContext);
 
   async function addCommand(commandItem: any) {
     let command: DeckItemProps = { position };
@@ -86,8 +87,12 @@ const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
     }),
   });
 
-  function handleDeleteDeckItem() {
-    removeCommand(item);
+  async function handleDeleteDeckItem() {
+    await removeCommand(item);
+  }
+
+  async function handleExecuteCommand() {
+    await executeCommand(item);
   }
 
   return (
@@ -121,6 +126,10 @@ const DeckItem: React.FC<Props> = ({ item, position, onClick }) => {
         </Button>
       </ContextMenuTrigger>
       <ContextMenuContent>
+        <ContextMenuItem className="gap-1" onClick={handleExecuteCommand}>
+          <FiPlay size={16} />
+          Execute
+        </ContextMenuItem>
         <ContextMenuItem className="gap-1" onClick={onClick}>
           <FiEdit size={16} />
           Edit
