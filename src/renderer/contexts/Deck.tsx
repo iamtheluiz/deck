@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 
 import api from '../services/api';
@@ -16,7 +17,7 @@ interface DeckContextData {
 const DeckContext = React.createContext<DeckContextData>({} as DeckContextData);
 
 // eslint-disable-next-line react/function-component-definition
-export const DeckProvider: React.FC = ({ children }) => {
+export function DeckProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<DeckItem[]>([]);
 
   useEffect(() => {
@@ -60,6 +61,7 @@ export const DeckProvider: React.FC = ({ children }) => {
 
   return (
     <DeckContext.Provider
+      // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         items,
         setItems,
@@ -73,6 +75,6 @@ export const DeckProvider: React.FC = ({ children }) => {
       {children}
     </DeckContext.Provider>
   );
-};
+}
 
 export default DeckContext;

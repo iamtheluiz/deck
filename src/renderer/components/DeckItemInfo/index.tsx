@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { dialog } from '@electron/remote';
-import { DeckItem } from '../../../../@types/DeckItem';
-import DeckContext from '../../contexts/Deck';
 
 import {
   DialogClose,
@@ -14,6 +11,10 @@ import {
 import { Input } from '@/ui/input';
 import { Button } from '@/ui/button';
 import { Label } from '@/ui/label';
+
+import { dialog } from '@electron/remote';
+import DeckContext from '../../contexts/Deck';
+import { DeckItem } from '../../../../@types/DeckItem';
 
 interface Props {
   item: DeckItem;
@@ -49,8 +50,13 @@ const DeckItemInfo: React.FC<Props> = ({ item, closeModal }) => {
     const { filePaths } = await dialog.showOpenDialog({
       properties: ['openFile'],
     });
-
     setContent(filePaths[0]);
+    // ipcRenderer.emit('deck-item-info-open-dialog');
+
+    // ipcRenderer.once('deck-item-info-dialog-selected-path', (arg) => {
+    //   console.log(arg);
+    //   setContent(arg);
+    // });
   }
 
   return (
@@ -82,7 +88,9 @@ const DeckItemInfo: React.FC<Props> = ({ item, closeModal }) => {
               setIcon(event.target.value);
             }}
           />
-          <Label htmlFor="content">Content</Label>
+          <Label htmlFor="content">
+            {item.type === 'Program' ? 'Path' : 'Content'}
+          </Label>
           <Input
             id="content"
             type="text"

@@ -7,13 +7,13 @@ import {
   FiTrash,
 } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import DeckContext from 'renderer/contexts/Deck';
 import MenuItem from '../MenuItem';
 import { Button } from '@/ui/button';
 
 export default function SideMenu() {
-  const { items, resetCommandList } = useContext(DeckContext);
+  const { resetCommandList } = useContext(DeckContext);
   const history = useHistory();
 
   function handleNavigateToSettings() {
@@ -23,10 +23,6 @@ export default function SideMenu() {
   async function handleRemoveAllCommands() {
     await resetCommandList();
   }
-
-  useEffect(() => {
-    console.table(items);
-  }, [items]);
 
   return (
     <aside className="flex flex-1 flex-col p-2 min-w-64 border-r border-input">

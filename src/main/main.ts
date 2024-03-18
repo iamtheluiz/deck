@@ -9,7 +9,7 @@
  * `./src/main.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, shell, ipcMain, dialog } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -55,6 +55,15 @@ ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
+});
+
+ipcMain.on('deck-item-info-open-dialog', async (event, arg) => {
+  console.log('Aqui!');
+  const { filePaths } = await dialog.showOpenDialog({
+    properties: ['openFile'],
+  });
+
+  event.reply('deck-item-info-dialog-selected-path', filePaths[0]);
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -114,6 +123,7 @@ const createWindow = async () => {
   });
 
   require('@electron/remote/main').enable(mainWindow);
+  require('@electron/remote/main').enable(mainWindow.webContents);
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
 
